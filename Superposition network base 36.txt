@@ -1,0 +1,28 @@
+import numpy as np
+
+def create_offset_matrix():
+    characters = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
+    matrix = np.zeros((36, 36, 36), dtype=object)
+    for i in range(36):
+        for j in range(36):
+            for k in range(36):
+                matrix[i, j, k] = characters[(i + j + k) % 36]  # Simple offset pattern
+    return matrix
+
+def encode_data_with_sound(amplitude, timbre, pulse_times):
+    offset_matrix = create_offset_matrix()
+    data = []
+    for pulse in pulse_times:
+        index = int(pulse / 1e9) % 36  # Convert nanoseconds to index
+        # Here, amplitude might determine which 'layer' or subset of the matrix to use
+        layer = int(amplitude * 35)  # Assuming amplitude scales 0-1 to 0-35
+        # Timbre could select from different partitions or views of the matrix
+        partition = int(timbre * 35)  # Assuming timbre scales similarly
+        data.append(offset_matrix[layer][partition][index])
+    return ''.join(data)
+
+# Example usage:
+amplitude = 0.5  # Example value
+timbre = 0.7
+pulse_times = [1e9 * i for i in range(36)]  # 1 to 36 nanoseconds
+encoded_data = encode_data_with_sound(amplitude, timbre, pulse_times)

@@ -1,0 +1,9 @@
+using System.Net.Http;
+using System.Threading.Tasks;
+
+public async Task<string> FetchFromCloud(string endpoint)
+{
+    using var client = new HttpClient();
+    var response = await client.GetStringAsync(endpoint);
+    return response;
+}

@@ -1,0 +1,7 @@
+from tensorly import kruskal_to_tensor
+
+def reconstruct_tensor(factors):
+    return kruskal_to_tensor(factors)
+
+# Example usage
+reconstructed_tensor = reconstruct_tensor(factors)

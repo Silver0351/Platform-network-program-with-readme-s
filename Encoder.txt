@@ -1,0 +1,18 @@
+def encode_data_to_audio(data):
+    audio = []
+    for chunk in chunk_data(data):  # Assume a function to chunk data
+        tone = generate_tone_for_chunk(chunk)
+        audio.append(tone)
+    return audio
+
+def generate_tone_for_chunk(chunk):
+    # Example: Encode chunk into lissajous curve parameters
+    freq_ratio = len(chunk) / 1000  # Example mapping
+    phase = sum(ord(c) for c in chunk) % 360  # Sum of ASCII values for phase
+    amplitude = max(1, min(10, len(chunk)))  # Amplitude based on chunk size
+    return create_lissajous_tone(freq_ratio, phase, amplitude)
+
+def create_lissajous_tone(freq_ratio, phase, amplitude):
+    # Simplified; this would be where you'd generate the actual audio waveform
+    t = np.linspace(0, 1, 1000)
+    return amplitude * np.sin(freq_ratio * 2 * np.pi * t + np.radians(phase))

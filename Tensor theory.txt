@@ -1,0 +1,18 @@
+import numpy as np
+import tensorly as tl
+
+tl.set_backend('numpy')
+
+def decompose_tensor(tensor, rank):
+    # CP Decomposition
+    factors = tl.decomposition.parafac(tensor, rank=rank)
+    return factors
+
+def reconstruct_tensor(factors):
+    return tl.kruskal_to_tensor(factors)
+
+# Example
+tensor = np.random.rand(3, 3, 3)  # Example tensor
+rank = 2  # Number of rank-1 tensors to decompose into
+factors = decompose_tensor(tensor, rank)
+reconstructed = reconstruct_tensor(factors)

@@ -1,0 +1,46 @@
+import json
+from hashlib import md5
+
+def encode_with_steganography_and_error_detection(data):
+    numbers = encode_data_to_numbers(data)  # As defined in previous examples
+    encoded_with_checksum = []
+
+    # Add error detection
+    for i in range(0, len(numbers), 3):  # Assuming 3 numbers per data chunk
+        chunk = numbers[i:i+3]
+        checksum = int(md5(json.dumps(chunk).encode()).hexdigest(), 16) % 1000  # Simple checksum
+        encoded_with_checksum.extend(chunk + [checksum])
+
+    # Steganography: Here we might embed these numbers into another data stream or file
+    # For this example, we'll just assume we're embedding in some innocuous data
+    cover_data = [0] * (len(encoded_with_checksum) * 2)  # Dummy cover data, twice as long as our encoded data
+    for i, num in enumerate(encoded_with_checksum):
+        cover_data[i * 2] = num  # Embedding the encoded data in every other position
+
+    return json.dumps(cover_data)
+
+def decode_with_error_detection(encoded_data):
+    numbers = json.loads(encoded_data)
+    decoded = []
+    
+    for i in range(0, len(numbers), 4):  # Each group of 4 numbers now includes a checksum
+        if i + 3 < len(numbers):  # Check if there's enough data
+            chunk = numbers[i:i+3]
+            checksum = numbers[i+3]
+            expected_checksum = int(md5(json.dumps(chunk).encode()).hexdigest(), 16) % 1000
+            
+            if checksum == expected_checksum:
+                decoded.extend(chunk)
+            else:
+                print(f"Error detected at index {i}")
+                # Here you would implement some form of error correction or report the error
+    
+    return decode_numbers_to_data(decoded)
+
+# Example usage:
+if __name__ == "__main__":
+    original_data = "Hello, World!"
+    encoded = encode_with_steganography_and_error_detection(original_data)
+    decoded = decode_with_error_detection(encoded)
+    print(f"Original: {original_data}")
+    print(f"Decoded: {decoded}")

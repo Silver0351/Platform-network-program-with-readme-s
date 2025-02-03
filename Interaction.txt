@@ -1,0 +1,8 @@
+def modify_factor(factors, index, new_factor):
+    factors[1][index] = new_factor  # Modify one factor
+    return factors
+
+# Example
+new_factor = np.ones_like(factors[1][0])
+modified_factors = modify_factor(factors, 0, new_factor)
+modified_tensor = reconstruct_tensor(modified_factors)

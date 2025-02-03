@@ -1,0 +1,9 @@
+def reactive_loop():
+    while True:
+        # Get external stimuli or user inputs
+        stimuli = get_stimuli()
+        # Convert stimuli to tones
+        tones = stimuli_to_tones(stimuli)
+        for tone in tones:
+            new_fractal = map_sound_to_fractal(tone)
+            execute_from_fractal(new_fractal)

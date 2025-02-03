@@ -1,0 +1,32 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+class SchmittTrigger:
+    def __init__(self, upper_threshold, lower_threshold):
+        self.upper_threshold = upper_threshold
+        self.lower_threshold = lower_threshold
+        self.state = 0  # Initial state
+
+    def process(self, input_signal):
+        if input_signal > self.upper_threshold and self.state == 0:
+            self.state = 1
+        elif input_signal < self.lower_threshold and self.state == 1:
+            self.state = 0
+        return self.state
+
+    def simulate(self, signal):
+        output = []
+        for s in signal:
+            output.append(self.process(s))
+        return np.array(output)
+
+# Example usage
+signal = np.sin(np.linspace(0, 4 * np.pi, 1000)) + np.random.normal(0, 0.1, 1000)  # Noisy sine wave
+trigger = SchmittTrigger(upper_threshold=0.5, lower_threshold=-0.5)
+clean_signal = trigger.simulate(signal)
+
+plt.figure(figsize=(10, 6))
+plt.plot(signal, label='Noisy Input')
+plt.plot(clean_signal, label='Schmitt Trigger Output')
+plt.legend()
+plt.show()

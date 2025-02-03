@@ -1,0 +1,5 @@
+def execute_from_fractal(fractal):
+    # Interpret fractal to generate or modify code
+    code_segments = interpret_fractal(fractal)
+    for segment in code_segments:
+        execute_segment(segment)

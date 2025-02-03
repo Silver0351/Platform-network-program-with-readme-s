@@ -1,0 +1,39 @@
+if __name__ == "__main__":
+    # 示例数据：想象这些是网络或数据点的不同部分
+    数据 = [np.array([1, 2, 3, 4]), np.array([4, 3, 2, 1]), np.array([2, 2, 4, 4])]
+    
+    模拟 = QuantumSimulation(数据)
+    
+    for t in range(10):  # 随时间模拟演化
+        模拟.evolve_state(time_step=0.1)
+        if t % 3 == 0:  # 每3步渲染一次以提高性能
+            模拟.render_3d()
+            模拟.render_lidar()
+        模拟.simulate_kaleidoscopic_plasma()
+
+    # 最终状态的可视化，展示层流和湍流
+    流线 = 模拟.create_flow_lines()
+    plt.imshow(流线, cmap='coolwarm', interpolation='bilinear')
+    plt.colorbar(label='流量大小')
+    plt.title('层流和湍流')
+    plt.show()
+
+if __name__ == "__main__":
+    # Пример данных: представьте это как различные части сети или точки данных
+    данные = [np.array([1, 2, 3, 4]), np.array([4, 3, 2, 1]), np.array([2, 2, 4, 4])]
+    
+    сим = QuantumSimulation(данные)
+    
+    for t in range(10):  # Моделирование эволюции со временем
+        сим.evolve_state(time_step=0.1)
+        if t % 3 == 0:  # Рендеринг каждые 3 шага для производительности
+            сим.render_3d()
+            сим.render_lidar()
+        сим.simulate_kaleidoscopic_plasma()
+
+    # Визуализация конечного состояния для показа ламинарного и турбулентного течения
+    линии_потока = сим.create_flow_lines()
+    plt.imshow(линии_потока, cmap='coolwarm', interpolation='bilinear')
+    plt.colorbar(label='Величина потока')
+    plt.title('Ламинарное и турбулентное течение')
+    plt.show()

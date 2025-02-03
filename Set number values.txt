@@ -1,0 +1,8 @@
+def encode_data_to_numbers(data):
+    numbers = []
+    for chunk in chunk_data(data):  # Assume 'chunk_data' splits data into manageable parts
+        freq_ratio = len(chunk) / 1000.0  # Example mapping
+        phase = sum(ord(c) for c in chunk) % 360  # Sum of ASCII values for phase
+        amplitude = max(0.1, min(10.0, len(chunk)))  # Normalize amplitude
+        numbers.extend([freq_ratio, phase, amplitude])
+    return numbers

@@ -1,0 +1,23 @@
+import numpy as np
+from scipy.spatial import Voronoi, voronoi_plot_2d
+import matplotlib.pyplot as plt
+
+def generate_fibonacci_tiling(max_size):
+    points = []
+    a, b = 0, 1
+    while b < max_size:
+        points.append([a, b])
+        a, b = b, a + b
+    return points
+
+def create_3d_hat_tiles(points):
+    # This would be a complex algorithm; here's a placeholder:
+    # Imagine creating a 3D Voronoi diagram from these points
+    vor = Voronoi(points)
+    return vor
+
+# Example usage for visualization:
+points = generate_fibonacci_tiling(100)
+vor = create_3d_hat_tiles(points)
+voronoi_plot_2d(vor)
+plt.show()

@@ -1,0 +1,8 @@
+def decode_numbers_to_data(numbers):
+    data = ""
+    for i in range(0, len(numbers), 3):  # Assuming each tone is described by 3 numbers
+        freq_ratio, phase, amplitude = numbers[i:i+3]
+        chunk_length = int(amplitude * 1000 / freq_ratio)
+        chunk = 'X' * chunk_length  # Placeholder for actual decoding
+        data += chunk
+    return data

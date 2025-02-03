@@ -1,0 +1,84 @@
+import tkinter as tk
+from tkinter import ttk
+from tkinter import messagebox
+import random  # For simulation purposes
+
+class NuclearSimulatorGUI:
+    def __init__(self, master):
+        self.master = master
+        master.title("Nuclear Reaction Simulator")
+        master.geometry("800x600")
+
+        # Create main frame
+        self.main_frame = ttk.Frame(master, padding="3 3 12 12")
+        self.main_frame.grid(column=0, row=0, sticky=(tk.N, tk.W, tk.E, tk.S))
+        master.columnconfigure(0, weight=1)
+        master.rowconfigure(0, weight=1)
+
+        # Function to create tooltips
+        def create_tooltip(widget, text):
+            def enter(event):
+                self.tooltip = tk.Toplevel(widget)
+                self.tooltip.wm_overrideredirect(True)
+                x, y = widget.winfo_pointerxy()
+                self.tooltip.wm_geometry(f"+{x+10}+{y+10}")
+                label = ttk.Label(self.tooltip, text=text, background="yellow", relief='solid', borderwidth=1)
+                label.pack(ipadx=1)
+
+            def leave(event):
+                if self.tooltip:
+                    self.tooltip.destroy()
+
+            widget.bind('<Enter>', enter)
+            widget.bind('<Leave>', leave)
+
+        # Component Selection
+        self.components = {
+            "Coolant": ["Water", "Helium", "Sodium"],
+            "Fuel": ["Uranium-235", "Plutonium-239", "Deuterium-Tritium"],
+            "Moderator": ["Graphite", "Heavy Water", "None"]
+        }
+
+        self.selected = {}
+        self.option_vars = {}
+
+        for i, (component, options) in enumerate(self.components.items()):
+            self.option_vars[component] = tk.StringVar(value=options[0])
+            label = ttk.Label(self.main_frame, text=f"Select {component}:")
+            label.grid(row=i, column=0, sticky=tk.W)
+            create_tooltip(label, f"Choose the {component.lower()} for the reactor.")
+            
+            combo = ttk.Combobox(self.main_frame, textvariable=self.option_vars[component], values=options, state="readonly")
+            combo.grid(row=i, column=1, sticky=(tk.W, tk.E))
+            self.selected[component] = combo
+
+        # Simulate Button
+        self.simulate_button = ttk.Button(self.main_frame, text="Simulate", command=self.simulate)
+        self.simulate_button.grid(row=len(self.components), column=0, columnspan=2, pady=10)
+        create_tooltip(self.simulate_button, "Run a simulation with the current selections.")
+
+        # Output Area
+        self.output = tk.Text(self.main_frame, height=10, width=50)
+        self.output.grid(row=len(self.components) + 1, column=0, columnspan=2, pady=10)
+        self.output.insert(tk.END, "Simulation results will appear here.")
+
+    def simulate(self):
+        # This is a placeholder for actual simulation logic
+        coolant = self.option_vars["Coolant"].get()
+        fuel = self.option_vars["Fuel"].get()
+        moderator = self.option_vars["Moderator"].get()
+        
+        # Example simulation output
+        result = f"Simulation with:\n- Coolant: {coolant}\n- Fuel: {fuel}\n- Moderator: {moderator}\n\n"
+        result += f"Energy Output: {random.randint(100, 1000)} MW\n"
+        result += f"Stability Index: {random.uniform(0.5, 1.0):.2f}\n"
+        result += f"Cost Estimate: ${random.randint(1000, 1000000):,}"
+
+        # Clear previous output and insert new results
+        self.output.delete('1.0', tk.END)
+        self.output.insert(tk.END, result)
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    simulator = NuclearSimulatorGUI(root)
+    root.mainloop()

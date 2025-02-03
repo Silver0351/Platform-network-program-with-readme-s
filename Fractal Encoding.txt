@@ -1,0 +1,6 @@
+def encode_instructions(data):
+    # Convert instructions to a lissajous curve
+    freq_ratio = len(data) / 1000.0  # Example mapping
+    phase = sum(ord(c) for c in data) % 360  # Phase based on sum of ASCII values
+    amplitude = 1.0  # Fixed amplitude for simplicity
+    return [freq_ratio, phase, amplitude]

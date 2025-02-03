@@ -1,0 +1,18 @@
+import networkx as nx
+
+def generate_spanning_tree(probability_sequence):
+    G = nx.DiGraph()
+    for i in range(len(probability_sequence)):
+        G.add_node(i)
+        if i > 0:
+            G.add_edge(i-1, i, weight=probability_sequence[i])
+    tree = nx.minimum_spanning_tree(G)
+    return tree
+
+# Process multiple sequences in parallel
+from multiprocessing import Pool
+
+def parallel_trees(sequences):
+    with Pool() as p:
+        trees = p.map(generate_spanning_tree, sequences)
+    return trees

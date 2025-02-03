@@ -1,0 +1,11 @@
+from tensorly.decomposition import parafac
+import numpy as np
+
+def decompose_tensor(tensor, rank):
+    factors = parafac(tensor, rank=rank)
+    return factors
+
+# Example
+tensor = np.random.rand(3, 3, 3)  # Example tensor
+rank = 2  # Number of rank-1 tensors to decompose into
+factors = decompose_tensor(tensor, rank)

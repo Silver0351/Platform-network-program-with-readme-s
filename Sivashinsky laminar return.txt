@@ -1,0 +1,5 @@
+def sivashinsky_equation(u, t, L=100):
+    # Simplified Sivashinsky equation for turbulence control
+    return -u - u**3 - 0.006 * u.laplace() + 0.006 * u.dx().laplace()
+
+# Use this in a loop or as part of a larger system to manage data flow

@@ -1,0 +1,19 @@
+def encode_data(self, data):
+    # Convert data into sine waves or Lissajous curves parameters
+    # Here, we'll use sine waves for simplicity
+    frequencies = np.linspace(20, 20000, len(data))
+    amplitudes = np.array(data) / np.max(data)  # Normalize data to create amplitudes
+    phases = np.random.uniform(0, 2*np.pi, len(data))
+    
+    # Generate sine waves
+    time = np.linspace(0, 1, 1000)
+    sine_waves = [amplitudes[i] * np.sin(2 * np.pi * frequencies[i] * time + phases[i]) for i in range(len(data))]
+    
+    # Use tuple(data) to make it hashable or use another identifier
+    data_hash = tuple(data)  # Convert to tuple for hashability
+    self.data_to_sound[data_hash] = sine_waves
+    
+    # Also, update sound_to_data mapping for decoding
+    self.sound_to_data[tuple(sine_waves)] = data  # Here, we need to hash sine_waves too
+    
+    return sine_waves

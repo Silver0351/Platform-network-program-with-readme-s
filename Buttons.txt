@@ -1,0 +1,23 @@
+public partial class MainForm : Form
+{
+    public MainForm()
+    {
+        InitializeComponent();
+        SetupUI();
+    }
+
+    void SetupUI()
+    {
+        // Add a TreeView for components/functions
+        var tree = new TreeView { Dock = DockStyle.Left, Width = 200 };
+        tree.Nodes.Add("Functions");
+        tree.Nodes[0].Nodes.Add("Quadratic Equations");
+        tree.Nodes[0].Nodes.Add("Fractal Patterns");
+        Controls.Add(tree);
+
+        // Add a ListView for selected items
+        var list = new ListView { Dock = DockStyle.Fill, View = View.Details };
+        list.Columns.Add("Selected", 200);
+        Controls.Add(list);
+    }
+}

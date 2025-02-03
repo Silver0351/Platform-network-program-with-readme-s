@@ -1,0 +1,5 @@
+import json
+
+def send_data(numbers):
+    # Convert to JSON or any other serialization format for transmission
+    return json.dumps(numbers)
