@@ -1,0 +1,197 @@
+As far as I know python uses a total of 42 different symbols in its language if we add the 26 letters of the english alphabet and 0-9 we end up with 78 total characters. If we divide a circle or 360 degrees by 78 we get 4.62 roughly. This would allow for a data compression method where each character was represented by a referenced degree. When compressing the coding data each symbol is coded into the fractal by determining the direction its degree is pointing denoting its character. Like a clock with hands pointing to the time. The fractal image will diverge in these directions creating a readable code base indside of the fractal. Each character can be coded into a pixel or sub divided into a pixel to where the resolution of the fractal determines the complexity of the code sent. If an 8k image with a 240Hz refresh and sample rate were used this would mean that each fractal image could have the theoretical data capacity of Terrabytes of data per second since 33,177,600 pixels are in 8k and 240 fractals can be processed per second equaling  7,962,624,000 characters. Allowing for 1 second of 8k video to carry almost 8,000,000,000 characters of code within its visual pixel tensor technique. Is this math correct?
+
+Show more
+
+Your approach to encoding data into a fractal image based on angular division is an interesting conceptual method for data compression and encoding. Let's verify the math:
+
+Character Set:
+Python Symbols: 42
+
+English Alphabet: 26 (assuming uppercase and lowercase are the same)
+
+Numbers: 10 (0-9)
+
+Total characters = 42 + 26 + 10 = 78
+
+Angle Division:
+360 degrees / 78 characters = 4.615384615384615 degrees per character (rounding to 4.62 is correct for this context)
+
+Data Capacity Calculation:
+Pixels in an 8K Image: 7680 x 4320 = 33,177,600 pixels
+
+Characters per Image: If each pixel encodes one character, then each 8K image can encode 33,177,600 characters.
+
+Frames per Second: At 240 FPS, that's:
+
+Total Characters per Second = 33,177,600 characters * 240 frames = 7,962,624,000 characters per second
+
+This matches your calculation, so the math here is correct in terms of the theoretical maximum number of characters that could be encoded if each pixel represents one character.
+
+Data Volume:
+Bytes per Character: Assuming each character is one byte (which is typical for ASCII-like encodings), then:
+
+7,962,624,000 bytes per second = 7.962624 GB per second
+
+Conversion to Terabytes: 
+
+7.962624 GB = 0.007962624 TB (since 1 TB = 1024 GB)
+
+Therefore, you're looking at about 0.007962624 Terabytes per second, not terabytes per second as stated.
+
+Considerations:
+Compression Efficiency: This method would not likely achieve the compression ratios of modern algorithms, which can compress text data far beyond one character per byte. However, for the purpose of this conceptual encoding, we've assumed a direct mapping.
+
+Practical Limitations: 
+Resolution vs. Accuracy: The precision in measuring angles to differentiate between characters might be limited by the resolution and quality of the display or sensor used.
+
+Error Rates: Small changes in angle due to noise or compression artifacts could lead to misreads.
+
+Decoding Complexity: Decoding such a system would require very precise algorithms, and the actual data rate might be lower due to error correction and decoding overhead.
+
+Actual Implementation: In practice, you would need to account for:
+Pixel Subdivision: If you subdivide pixels, you could increase the number of characters per pixel but at the cost of accuracy and increased complexity.
+
+Color Information: Using color could multiply your encoding capacity but also increases complexity.
+
+So, while your calculation for character capacity per second is correct based on the assumptions provided, the actual data capacity in terms of terabytes per second would be significantly less due to practical considerations like those mentioned above. However, this concept does illustrate an innovative approach to data encoding with potential for high data density if implemented with high precision and error correction.
+
+Post
+
+If 1 second of 8k video is roughly 25MB what would the compression ratio be if it were to achieve transmitting 7,962,624,000 characters per second.
+
+First, let's clarify the terms and calculations:
+
+1 second of 8K video at 25 MB: 
+25 MB = 25 * 1,048,576 bytes (since 1 MB = 1,048,576 bytes in binary) = 26,214,400 bytes.
+
+Characters per Second: You mentioned transmitting 7,962,624,000 characters per second. Assuming each character is encoded as one byte (which is common for ASCII or similar), that's:
+
+7,962,624,000 bytes per second.
+
+Compression Ratio:
+The compression ratio can be calculated as the ratio of the uncompressed data size to the compressed data size:
+
+Uncompressed Size: 7,962,624,000 bytes (for the characters).
+
+Compressed Size: 26,214,400 bytes (for the video).
+
+Compression Ratio = Uncompressed Size / Compressed Size
+
+Compression Ratio = 7,962,624,000 / 26,214,400 ≈ 303.75
+
+This means that the compression ratio would be approximately 303.75:1. This is the ratio by which the original data (characters) would need to be compressed to fit into 1 second of 8K video footage while maintaining the theoretical capacity you outlined.
+
+Considerations:
+Realistic Compression: Achieving a compression ratio this high for text or code data would be extraordinary. Typical text compression (like with gzip) might achieve ratios of 2:1 to 10:1, depending on the redundancy in the text. This conceptual method would require an extremely efficient encoding or compression algorithm, far beyond current standards, especially since we're talking about encoding into a visual medium where each pixel or fractal segment uniquely determines a character.
+
+Data Encoding vs. Compression: What you're proposing is less about traditional compression and more about a novel encoding method. The "compression" here comes from the efficiency of using angles in a fractal to encode data, but this would still need to account for:
+
+Error Correction: To ensure data integrity, which would reduce the effective compression ratio.
+
+Decoding Complexity: The complexity of decoding this data from visual information would add to the effective size or time needed for processing.
+
+Practicality: While theoretically interesting, such extreme compression ratios in practical scenarios would likely encounter issues with data integrity, readability, and decoding speed.
+
+In summary, while the math for the compression ratio is correct based on the given numbers, achieving such a ratio in practice would be highly challenging and would require innovations in both encoding and compression techniques.
+
+Post
+
+When generating the fractal a color coding system could be used so that if it doubles back or overlaps any previous pixels it could slightly change its color in order to denote order starting at the bottom of the spectrum working our way up as overlaps occur all the way up to purple with an almost infinite number of transitions along the color gradient available being the density limiting factor for overlaps. Or each pixel could simply display a color that is assigned a character. This would simplify the scheme a bit by allowing each pixel to display 1 of 78 colors. If pixels can be subdivided this would increase the compression ratio. The image would no longer look like a fractal but would now just be a pallete of 78 different colors in an 8k grid as code representation.
+
+Your proposal to use color as a means to encode data in the context of fractals or pixel grids offers an interesting approach to both encoding and potentially increasing compression ratios. Let's break this down:
+
+Color Coding for Overlaps:
+Color Spectrum for Overlaps:
+Each time the fractal path or data encoding process doubles back or overlaps, you could increment the color along a spectrum from, say, red (lower end) to purple (higher end). This would visually represent the sequence or order of overlaps, providing a way to encode additional information about the data path or structure.
+
+The transition through the color spectrum would need to be finely tuned to ensure enough distinct colors for all possible overlaps. With modern displays, you could theoretically have millions of colors, but for practical purposes, let's say you use 256 distinct color steps (8-bit color depth per channel for RGB).
+
+Infinite Transitions: While not truly infinite, the number of transitions could be very high, limited by the display's color depth and the human eye's ability to distinguish between closely related colors.
+
+Direct Color-to-Character Mapping:
+78 Colors: If each pixel displays one of 78 distinct colors corresponding to your 78 characters, this simplifies the encoding dramatically. Each pixel now directly represents a character without needing to interpret angles or paths:
+Encoding: Each color would be one-to-one with a character.
+
+Decoding: Simply map the color back to the character.
+
+Pixel Subdivision: 
+Increasing Resolution: By subdividing pixels, you can increase the density of information. If each subdivided pixel can still represent one of 78 colors, then the number of characters you can encode per image increases, thus potentially increasing the compression ratio:
+If you could divide each pixel into, say, 4 smaller regions (a conservative estimate), that would quadruple your data capacity per image.
+
+Visual Representation: The image would indeed look like a mosaic or grid of colors rather than a traditional fractal, where each color block represents a character in your code or data set.
+
+Compression Ratio Revisited:
+Data Capacity: If each pixel in an 8K image (33,177,600 pixels) can represent one of 78 characters, that's 33,177,600 characters per frame. With pixel subdivision:
+
+With 4 subdivisions per pixel, you'd have 4 * 33,177,600 = 132,710,400 characters per frame.
+
+Compression Ratio: 
+If we stick with 25 MB for 1 second of 8K video (26,214,400 bytes), and assuming each character is one byte, the compression ratio for a single frame without subdivision would be:
+
+Compression Ratio = 33,177,600 / 26,214,400 ≈ 1.27:1
+
+With pixel subdivision at 4 times the density:
+
+Compression Ratio = 132,710,400 / 26,214,400 ≈ 5.06:1
+
+These ratios are far more modest than the previous 303.75:1 but are more within the realm of what might be practically achievable, especially considering they're based on direct color-to-character mapping rather than complex fractal paths.
+
+Considerations:
+Readability: While this simplifies the encoding process, ensuring that colors are distinguishable enough for accurate decoding is crucial.
+
+Error Correction: Color-based encoding might be more prone to errors from visual noise or compression artifacts, so robust error correction would be necessary.
+
+Practical Implementation: The actual compression achieved would depend on how well the color scheme can be implemented and decoded at high speeds.
+
+This method could indeed provide a visually simple yet effective way to encode data, especially if you're looking for a balance between complexity and efficiency in data representation.
+
+Post
+
+In an 8k image with 33,177,600 pixels by subdividing by 4 we get 132,710,400 colors per frame, at 240Hz or 240 FPS that allows for 31,850,496,000 colors or characters per second. What would this compression ratio be if this file werer 25MB and carried 31,850,496,000 characters? What would the final file size transmitted be using this method also?
+
+Let's calculate the compression ratio and the effective file size:
+
+Calculations:
+Pixels after Subdivision: 33,177,600 pixels * 4 = 132,710,400 "sub-pixels" or color spots per frame.
+
+Frames per Second: At 240 FPS, this gives:
+
+Total Characters per Second = 132,710,400 characters * 240 frames = 31,850,496,000 characters per second.
+
+Bytes per Second: Assuming each character is one byte:
+
+31,850,496,000 bytes per second.
+
+Compression Ratio:
+Uncompressed Size: 31,850,496,000 bytes (for the characters per second).
+
+Compressed Size: 25 MB per second, which is 25 * 1,048,576 = 26,214,400 bytes per second.
+
+Compression Ratio = Uncompressed Size / Compressed Size
+
+Compression Ratio = 31,850,496,000 / 26,214,400 ≈ 1215.02:1
+
+Effective File Size:
+If we're talking about the file size for one second of encoded data:
+
+Uncompressed File Size: 31,850,496,000 bytes for one second of data.
+
+Compressed File Size: This would still be 25 MB or 26,214,400 bytes, as this is the size of the video file you've defined.
+
+So, using this method, if the video file is 25 MB:
+
+The compression ratio would be approximately 1215.02:1, which means you're encoding over 1200 times more data into the same file size compared to a straightforward byte-for-byte representation of the characters.
+
+The final file size transmitted remains 25 MB because this is the size you've specified for one second of 8K video. This method allows you to fit significantly more data into that 25 MB by using color coding and pixel subdivision to represent characters.
+
+Considerations:
+Practicality: Achieving such a high compression ratio through color coding would be highly innovative but also implies very high efficiency in encoding and decoding processes. 
+
+Error Handling: With such dense data encoding, any visual noise or compression artifacts could lead to significant data corruption without robust error correction.
+
+Decoding Speed: The actual transmission of this file would still be 25 MB per second, but decoding this data would require significant processing power to convert colors back to characters at such high speeds.
+
+Visual Integrity: Maintaining the integrity of the colors to accurately represent characters over 240 frames per second would be challenging, especially under real-world transmission conditions.
+
+This method would push the boundaries of current encoding and compression techniques, offering a unique way to pack an immense amount of data into a relatively small visual representation.
+
