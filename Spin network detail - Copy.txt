@@ -1,0 +1,86 @@
+import numpy as np
+from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister, execute, Aer
+from qiskit.visualization import plot_state_city
+import networkx as nx
+import matplotlib.pyplot as plt
+
+class SpinNetwork:
+    def __init__(self, num_qubits):
+        self.num_qubits = num_qubits
+        self.graph = nx.Graph()
+        for i in range(num_qubits):
+            self.graph.add_node(i)
+        self.circuit = QuantumCircuit(QuantumRegister(num_qubits), ClassicalRegister(num_qubits))
+
+    def add_edge(self, node1, node2):
+        self.graph.add_edge(node1, node2)
+        # Entangle nodes with a CNOT gate for simplicity
+        self.circuit.cx(node1, node2)
+
+    def prepare_initial_state(self):
+        # Prepare an initial entangled state; here we'll use GHZ state for all nodes
+        for i in range(self.num_qubits):
+            self.circuit.h(i)
+        for i in range(self.num_qubits - 1):
+            self.circuit.cx(i, i + 1)
+
+    def weak_measurement(self, target_node, weak_param=0.1):
+        # A weak measurement is simulated with a small angle rotation
+        # This doesn't collapse the state completely but gives partial information
+        self.circuit.ry(weak_param * np.pi, target_node)
+        # Measure one bit to get some information without fully collapsing
+        self.circuit.measure(target_node, target_node)
+
+    def full_measurement(self):
+        # Full measurement for comparison
+        self.circuit.measure_all()
+
+    def simulate(self, shots=1000):
+        backend = Aer.get_backend('qasm_simulator')
+        job = execute(self.circuit, backend, shots=shots)
+        return job.result()
+
+    def visualize_state(self, state_vector):
+        plot_state_city(state_vector)
+        plt.show()
+
+    def visualize_network(self):
+        pos = nx.spring_layout(self.graph)
+        nx.draw(self.graph, pos, with_labels=True, node_color='lightblue', node_size=500, font_size=16, font_color='black')
+        plt.show()
+
+# Usage
+network = SpinNetwork(5)
+
+# Create entanglement (edges)
+network.add_edge(0, 1)
+network.add_edge(1, 2)
+network.add_edge(2, 3)
+network.add_edge(3, 4)
+
+# Prepare initial entangled state
+network.prepare_initial_state()
+
+# Visualize the network structure
+network.visualize_network()
+
+# Perform weak measurement on node 2
+network.weak_measurement(2)
+
+# Simulate the circuit
+result = network.simulate()
+
+# Get the counts of the measurement outcomes
+print("Measurement Outcomes:", result.get_counts(network.circuit))
+
+# For comparison, simulate full measurement
+full_measurement_circuit = QuantumCircuit(QuantumRegister(5), ClassicalRegister(5))
+full_measurement_circuit = full_measurement_circuit.compose(network.circuit)
+full_measurement_circuit.measure_all()
+full_result = execute(full_measurement_circuit, Aer.get_backend('qasm_simulator'), shots=1000).result()
+
+print("Full Measurement Outcomes:", full_result.get_counts(full_measurement_circuit))
+
+# State visualization for the initial state before any measurement
+initial_state = execute(network.circuit.remove_final_measurements(), Aer.get_backend('statevector_simulator')).result().get_statevector()
+network.visualize_state(initial_state)
