@@ -1,0 +1,12 @@
+class GlossaryManager:
+    def __init__(self):
+        self.glossaries = {}
+
+    def load_glossary(self, version):
+        if version not in self.glossaries:
+            self.glossaries[version] = HashCache(f"glossary_{version}.mp4")
+        return self.glossaries[version]
+
+    def get_data(self, operation_type, query_hash):
+        glossary = self.load_glossary(select_glossary_for_operation(operation_type))
+        return glossary.get_data(query_hash)

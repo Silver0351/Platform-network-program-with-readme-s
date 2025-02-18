@@ -1,0 +1,15 @@
+import requests
+
+def check_glossary_version(current_version):
+    latest_version = requests.get('http://example.com/api/latest_glossary_version').json()
+    if latest_version > current_version:
+        return latest_version
+    return None
+
+# Usage
+current_version = "1.0"
+new_version = check_glossary_version(current_version)
+if new_version:
+    print(f"New version available: {new_version}")
+    # Download new version
+    download_new_version(new_version)

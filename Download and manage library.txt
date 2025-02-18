@@ -1,0 +1,20 @@
+import os
+
+def download_new_version(version):
+    url = f"http://example.com/glossaries/glossary_{version}.mp4"
+    response = requests.get(url, stream=True)
+    if response.status_code == 200:
+        with open(f"glossary_{version}.mp4", 'wb') as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                f.write(chunk)
+        return True
+    return False
+
+# Example of using different glossaries for different operations
+def select_glossary_for_operation(operation_type):
+    if operation_type == 'probabilistic':
+        return "glossary_2.1.mp4"  # Assumes this version is optimized for probabilistic operations
+    elif operation_type == 'permutation':
+        return "glossary_3.0.mp4"  # Assumes this version is optimized for permutation operations
+    else:
+        return "glossary_1.0.mp4"  # Default or general use glossary
