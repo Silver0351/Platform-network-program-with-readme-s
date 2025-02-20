@@ -1,0 +1,8 @@
+Processing video with 240 frames
+Frame 0: QR=Hello, Instruction=SET MODE ON
+Frame 1: QR=World, Instruction=RUN DISPLAY
+Daemon started
+Executing: SET MODE ON with data: Hello
+Set parameter MODE = ON
+Executing: RUN DISPLAY with data: World
+Running task DISPLAY with data World

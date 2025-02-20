@@ -1,0 +1,36 @@
+import cv2
+from pyzbar.pyzbar import decode as decode_qr
+from pydub import AudioSegment
+
+class VideoProcessor:
+    def __init__(self, video_path):
+        self.video = cv2.VideoCapture(video_path)
+        self.fps = self.video.get(cv2.CAP_PROP_FPS)  # Frames per second
+        self.frame_duration_ms = 1000 / self.fps      # Duration of each frame in ms
+        self.audio = AudioSegment.from_file(video_path, format="mp4")
+        self.total_frames = int(self.video.get(cv2.CAP_PROP_FRAME_COUNT))
+
+    def get_frame_and_audio(self, frame_number):
+        """Extract frame image and corresponding audio segment."""
+        if frame_number >= self.total_frames:
+            return None, None
+        # Get video frame
+        self.video.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
+        ret, frame = self.video.read()
+        if not ret:
+            return None, None
+        # Extract audio segment for this frame
+        start_time = frame_number * self.frame_duration_ms
+        end_time = (frame_number + 1) * self.frame_duration_ms
+        audio_segment = self.audio[start_time:end_time]
+        return frame, audio_segment
+
+    def decode_qr(self, frame):
+        """Decode QR code from a frame."""
+        decoded_objects = decode_qr(frame)
+        if decoded_objects:
+            return decoded_objects[0].data.decode('utf-8')
+        return None
+
+    def __del__(self):
+        self.video.release()
